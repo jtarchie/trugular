@@ -19,16 +19,19 @@ describe('Routing', function() {
   });
 
   describe('When calling a specific URL', function() {
-    beforeEach(function() {
-      app.$go('/world');
-    });
-
     it('renders the template', function() {
+      app.$go('/world');
       expect(body.textContent).toEqual('Hello World');
     });
 
     it('push the request URL', function() {
+      app.$go('/world');
       expect(window.history.pushState).toHaveBeenCalledWith({  }, '', '/world');
+    });
+
+    it('ignored the trailing slash', function() {
+      app.$go('/world/');
+      expect(body.textContent).toEqual('Hello World');
     });
   });
 

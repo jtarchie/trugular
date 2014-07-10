@@ -5,8 +5,11 @@
   document.addEventListener('DOMContentLoaded', function(){
     var app = new $trugular();
     app.$route({
-      url: '/',
-      template: 'Hello World!'
+      url: '/examples',
+      template: 'Hello World! <a href="/bye">Bye</A>'
+    }).$route({
+      url: '/bye',
+      template: 'Good Bye'
     });
     app.$run();
   });
