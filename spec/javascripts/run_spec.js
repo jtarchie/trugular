@@ -8,6 +8,8 @@ describe('Running an applicaiton', function() {
     spyOn(app, '$go');
   });
 
+  afterEach(function() { app.$destroy(); });
+
   it('replaces to the current request path', function() {
     app.$run();
     expect(app.$go).toHaveBeenCalledWith(location.pathname, true);

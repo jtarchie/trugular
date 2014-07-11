@@ -3,7 +3,9 @@
   <script src="../lib/app.js"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function(){
-    var app = new $trugular();
+    var app = new $trugular({
+      rootElement: document.getElementById('viewport')
+    });
     app.$route({
       url: '/examples',
       template: 'Hello World! <a href="/bye">Bye</A>'
@@ -16,5 +18,9 @@
   </script>
 </head>
 <body>
+<div id="viewport"></div>
+<template id="/examples">
+  Hello World <a href="/bye">Bye</a>
+</template>
 </body>
 </html>

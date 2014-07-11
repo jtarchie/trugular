@@ -18,6 +18,8 @@ describe('Routing', function() {
     spyOn(window.history, "replaceState");
   });
 
+  afterEach(function() { app.$destroy(); });
+
   describe('When calling a specific URL', function() {
     it('renders the template', function() {
       app.$go('/world');
