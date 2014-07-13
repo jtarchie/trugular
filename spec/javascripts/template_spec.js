@@ -4,8 +4,6 @@ describe('Templating', function() {
   var app, body;
 
   beforeEach(function() {
-    var root = document.getElementById('jasmine_content');
-
     root.innerHTML = '<div id="body"></div>'
       + '<template id="/examples">Hello World!</template>';
       + '<template id="/both">Hello World!</template>';
@@ -20,8 +18,6 @@ describe('Templating', function() {
       url: '/hello',
       template: 'Goodbye'
     });
-
-    spyOn(window.history, "pushState");
   });
 
   afterEach(function() { app.$destroy(); });

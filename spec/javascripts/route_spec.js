@@ -1,11 +1,10 @@
 describe('Routing', function() {
   'use strict';
 
-  var app, body;
+  var app;
 
   beforeEach(function() {
-    body = document.getElementById('jasmine_content');
-    app = new $trugular({rootElement: body});
+    app = new $trugular({rootElement: root});
     app.$route({
       url: '/world',
       template: 'Hello World'
@@ -13,19 +12,11 @@ describe('Routing', function() {
       url: '/',
       template: 'Root URL'
     });
-
-    spyOn(window.history, "pushState");
-    spyOn(window.history, "replaceState");
   });
 
   afterEach(function() { app.$destroy(); });
 
   describe('When calling a specific URL', function() {
-    it('renders the template', function() {
-      app.$go('/world');
-      expect(body.textContent).toEqual('Hello World');
-    });
-
     it('push the request URL', function() {
       app.$go('/world');
       expect(window.history.pushState).toHaveBeenCalledWith({  }, '', '/world');
@@ -33,7 +24,7 @@ describe('Routing', function() {
 
     it('ignored the trailing slash', function() {
       app.$go('/world/');
-      expect(body.textContent).toEqual('Hello World');
+      expect(window.history.pushState).toHaveBeenCalledWith({  }, '', '/world/');
     });
   });
 
@@ -42,11 +33,7 @@ describe('Routing', function() {
       app.$go();
     });
 
-    it('defaults to root /', function() {
-      expect(body.textContent).toEqual('Root URL');
-    });
-
-    it('push the request URL', function() {
+    it('push the default root request URL', function() {
       expect(window.history.pushState).toHaveBeenCalledWith({  }, '', '/');
     });
   });
